@@ -5,6 +5,7 @@ const getFoodsData = async () => {
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/random`,
   );
   const res = await data.json();
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return res.foods || [];
 };
 const FoodPage = async () => {
