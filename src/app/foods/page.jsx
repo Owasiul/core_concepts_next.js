@@ -1,5 +1,6 @@
 import React from "react";
 import RecipeCard from "../Components/Card/Card";
+import Cart from "./Cart/Cart";
 const getFoodsData = async () => {
   const data = await fetch(
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/random`,
@@ -16,12 +17,23 @@ const FoodPage = async () => {
         Total: <span className="font-bold text-yellow-400">{api.length}</span>{" "}
         Data Found
       </p>
-      <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5 items-center mx-auto py-4">
-        {api.map((foodData) => {
-          return (
-            <RecipeCard key={foodData.id} foodData={foodData}></RecipeCard>
-          );
-        })}
+      <div className="flex gap-5">
+        <div className="flex-1 w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5 items-center mx-auto py-4">
+          {api.map((foodData) => {
+            return (
+              <RecipeCard key={foodData.id} foodData={foodData}></RecipeCard>
+            );
+          })}
+        </div>
+        <div className="border-2 w-[300px] rounded-xl py-4 px-2">
+          <h2 className="text-xl font-bold text-white pb-1 border-b-2 border-white">
+            {" "}
+            Cart Items
+          </h2>
+          <div className="">
+            <Cart></Cart>
+          </div>
+        </div>
       </div>
     </div>
   );

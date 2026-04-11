@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import AddtoCartButton from "../Buttons/AddtoCartButton";
 
 const RecipeCard = ({ foodData }) => {
   // console.log(foodData);
@@ -40,23 +41,7 @@ const RecipeCard = ({ foodData }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-orange-600 active:scale-[0.98] shadow-md hover:shadow-orange-200">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
-          Add to Cart
-        </button>
+        <AddtoCartButton foodData={foodData}></AddtoCartButton>
       </div>
     </div>
   );

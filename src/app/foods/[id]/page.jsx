@@ -36,7 +36,7 @@ const PageDetails = async ({ params }) => {
           <img
             src={food.foodImg}
             alt={food.title}
-            className="w-full h-[400px] object-cover transition-transform hover:scale-105 duration-300"
+            className="w-full h-100 object-cover transition-transform hover:scale-105 duration-300"
           />
         </div>
 
