@@ -1,22 +1,30 @@
-import React from "react";
+import React, { Suspense } from "react";
 import RecipeCard from "../Components/Card/Card";
 import Cart from "./Cart/Cart";
-const getFoodsData = async () => {
+import Search from "../Components/Search/Search";
+import Loading from "./loading";
+const getFoodsData = async (search) => {
   const data = await fetch(
-    `https://taxi-kitchen-api.vercel.app/api/v1/foods/random`,
+    `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`,
   );
   const res = await data.json();
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return res.foods || [];
 };
-const FoodPage = async () => {
-  const api = await getFoodsData();
+const FoodPage = async ({ searchParams }) => {
+  const { search = "" } = await searchParams;
+  const api = await getFoodsData(search);
   return (
     <div className="px-4 w-full mx-auto my-3">
       <p className="text-4xl text-white font-semibold mx-4">
         Total: <span className="font-bold text-yellow-400">{api.length}</span>{" "}
         Data Found
       </p>
+      <div className="my-4">
+        <Suspense fallback={<Loading></Loading>}>
+          <Search></Search>
+        </Suspense>
+      </div>
       <div className="flex gap-5">
         <div className="flex-1 w-full grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5 items-center mx-auto py-4">
           {api.map((foodData) => {
