@@ -6,6 +6,7 @@ import Loading from "./loading";
 const getFoodsData = async (search) => {
   const data = await fetch(
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`,
+    { next: { revalidate: 10 } },
   );
   const res = await data.json();
   await new Promise((resolve) => setTimeout(resolve, 3000));

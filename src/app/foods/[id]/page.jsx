@@ -5,9 +5,13 @@ const getFoodDetails = async (id) => {
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`,
   );
   const data = await res.json();
-  await new Promise((resolve) => setTimeout(resolve, 3000))
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return data.details;
 };
+
+export function generateStaticParams() {
+  return [{ id: "53071" }, { id: "52873" }, { id: "53054" }, { id: "53078" }];
+}
 
 const PageDetails = async ({ params }) => {
   const { id } = await params;
@@ -26,8 +30,6 @@ const PageDetails = async ({ params }) => {
   // Convert YouTube URL to Embed format
   const embedUrl = food.video?.replace("watch?v=", "embed/");
 
-
-
   return (
     <div className="max-w-5xl mx-auto p-6 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -43,9 +45,7 @@ const PageDetails = async ({ params }) => {
         {/* Food Info */}
         <div className="space-y-6">
           <div>
-            <h1 className="text-4xl font-extrabold text-white">
-              {food.title}
-            </h1>
+            <h1 className="text-4xl font-extrabold text-white">{food.title}</h1>
             <div className="flex gap-2 mt-3">
               <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
                 {food.category}
@@ -64,9 +64,7 @@ const PageDetails = async ({ params }) => {
           </div>
 
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-white">
-              Preparation Video
-            </h3>
+            <h3 className="text-lg font-bold text-white">Preparation Video</h3>
             <div className="aspect-video w-full rounded-xl overflow-hidden shadow-md">
               <iframe
                 src={embedUrl}
